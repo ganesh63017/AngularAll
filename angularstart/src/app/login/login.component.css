@@ -1,0 +1,9 @@
+.b{
+  background-color: aqua;
+  border:"none";
+  border-radius: 5px;
+  padding:20px;
+}
+.errmsg{
+  color: red;
+}

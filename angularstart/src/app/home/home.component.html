@@ -1,0 +1,40 @@
+
+
+<div>
+  <h1>To do list</h1>
+  <div class="d-flex">
+      <input #i [(ngModel)]="inputValue" placeholder="Enter your todo here" [value]="inputValue"/>
+    <button
+      mat-raised-button
+      [color]="changeButton === 'Update Todo' ? 'warn' : 'primary'"
+      class="m-5"
+      (click)="addTodo()"
+    >
+      {{ changeButton }}
+    </button>
+  </div>
+  <div *ngIf="todoList.length !== 0">
+
+    <div *ngFor="let items of todoList; let i = index">
+      <div class="list">
+        <p>{{ i + 1 }}</p>
+        <p>{{ items.value | uppercase}}</p>
+        <p>{{ items.value | slice:0:1}}</p>
+        <p>{{day | date :"fullDate"}}</p>
+        <em
+          style="font-size: 18px; color: blue"
+          class="fa"
+          (click)="editTodo(items.id)"
+          >&#xf044;
+        </em>
+        <em
+          class="fa fa-trash"
+          style="font-size: 18px; color: red"
+          (click)="removeTodo(items.id)"
+        ></em>
+        <button routerLink="/data/{{items.id}}"  class="btn btn-info">Get data</button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-child [items] = "todoList[0]" [n]="changeData" (updateData)="updateData($event)"></app-child>

@@ -1,0 +1,111 @@
+<!-- <div>
+  <p>The value is : {{ displayValue }}</p>
+  <button (click)="increase()">Increase +</button>
+  <button (click)="decrease()">Decrease -</button>
+  <input type="text" [disabled] = dis>
+  <div *ngIf = "show; then a else b"></div>
+  <ng-template #a>A</ng-template>
+  <ng-template #b>B</ng-template>
+  <ng-template [ngIf] = show>
+    GANESH
+  </ng-template>
+<div [ngSwitch]=show>
+<h1 *ngSwitchCase=true>TRUE</h1>
+<h1 *ngSwitchDefault>NO</h1>
+<h3 *ngFor = "let item of userData">
+  <h1>{{item.name}}</h1>
+  <p>{{item.email}}</p>
+</h3>
+</div>
+</div>
+
+
+<div *ngIf = 'formData.email && formData.password && formData.userName'>
+  <h1> EMAIL : {{formData.email}}</h1>
+  <h1>Password : {{formData.password}}</h1>
+  <h1>UserName : {{formData.userName}}</h1>
+</div>
+<button mat-button>Basic</button>
+<button mat-raised-button color="primary">Primary</button>
+
+<h1>Template Form Control</h1>
+<form #form="ngForm" (ngSubmit)="submit(form.value)">
+  <br />
+  <input
+    type="text"
+    #userName="ngModel"
+    required
+    ngModel
+    name="userName"
+    placeholder="Please Enter userName"
+    class="form-control"
+    pattern="[a-zA-Z]+$"
+  />
+  <p *ngIf="userName.invalid && userName.touched" style="color:red">* Please Provide UserName</p>
+
+  <br />
+  <input
+    type="text"
+    ngModel
+    name="email"
+    required
+    email
+    #email="ngModel"
+    placeholder="please Enter email"
+    class="form-control"
+  />
+  <p *ngIf="email.invalid && email.touched" style="color:red">* Please Provide email</p>
+  <br />
+  <input
+    type="password"
+    ngModel
+    required
+    #password="ngModel"
+    name="password"
+    minlength="6"
+    placeholder="please Enter password"
+    class="form-control"
+  />
+  <p *ngIf="password.invalid && password.touched" style="color:red">* Please Provide password</p>
+  <br />
+  <button [disabled]="form.invalid" class="btn btn-primary">Submit</button>
+</form>
+<br/> -->
+<h1>React Forms Control</h1>
+
+<form [formGroup]="loginForm" (ngSubmit)="getFormData()">
+  <input
+    type="text"
+    placeholder="please Enter Email"
+    class="form-control"
+    formControlName="email"
+  />
+  <br />
+  <div *ngIf="loginForm.controls['email'].touched" class="errmsg">
+    <div *ngIf="loginForm.controls['email']?.errors?.['required']">
+      Empty is not Allowed *
+    </div>
+    <div *ngIf="loginForm.controls['email']?.errors?.['email']">
+      Please Enter valid Email *
+    </div>
+  </div>
+
+  <input
+    formControlName="password"
+    type="password"
+    placeholder="please Enter password"
+    class="form-control"
+  />
+  <p
+    *ngIf="
+      loginForm.controls['password'].touched &&
+      loginForm.controls['password'].invalid
+    "
+    style="color: brown"
+  >
+    Please Enter valid Password *
+  </p>
+
+  <br />
+  <button [disabled]="loginForm.invalid" class="btn btn-success">Submit</button>
+</form>
